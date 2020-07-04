@@ -1,0 +1,105 @@
+<html>
+    <head>
+        <title> <%= title%> </title>
+        <!-- importing bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <!-- supporting all devices -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- importing font awesome -->
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+        <!-- Adding Css file -->
+        <link rel="stylesheet" href="/css/main.css">
+        
+
+     
+
+    </head>
+    <body>
+
+
+        <div class="container-fluid col-md-10 felx-col" id="main-content">
+            <div class="d-flex justify-content-center">
+                <h1 class="center"><span class="text-success"><i class="fas fa-clipboard-check"></i></span> <span>TODO App</span></h1>
+            </div>
+            
+
+            <!--form to add the task-->
+            <form class="flex-col" method="post" action="/add-task">
+                
+                <div class="form-row">
+                    <div class="col-md-12 mb-3">
+                    <label for="validationDefault01"><h5>Description</h5></label>
+                    <textarea type="text" name="description" class="form-control" id="validationDefault01" placeholder="What do you want to do?" required rows='2' placeholder='Auto-Expanding Textarea'></textarea>
+                    </div>
+                
+                    
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="exampleFormControlSelect1"><h5>Category</h5></label>
+                        <select name="category" class="form-control" id="exampleFormControlSelect1" >
+                            <option selected disabled value="">Choose a Category</option>
+                            <option>General</option>
+                            <option>Personal</option>
+                            <option>Work</option>
+                            <option>School</option>
+                          
+                            
+                        </select>
+                      </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="validationDefault01"><h5>Due Date</h5></label>
+                        <input name="date" type="date" class="form-control" id="validationDefault01" value="No Deadline" >
+                    </div>
+
+                </div>
+            
+                <button class="flex-row addButton col-md-12 mb-3 mt-1 btn" id="add-button" type="submit">
+                    <i class="fas fa-plus"></i>
+                    <h4 style="display: inline;">ADD TASK</h4>
+                </button>
+
+            </form>
+
+            <!--Added task content to be shown with a form of checkbox to delete the checked task-->
+
+               <form id="task-todo" action="/destroy-task" method="POST" >
+                   <div id="added-task-heading">
+                        <h2>
+                            Task to be done
+                        </h2>
+                        <button id="delete-button" type="submit"><span> <i class="fas fa-trash-alt"></i></span></button>
+                   
+                   </div>
+                <% for(let i of task){ %>
+
+                    <div class="task-added">
+                        <input type="checkbox" name="taskID" value="<%= i._id %>" class="delete-checkbox">
+                        <div class="info">
+                            <span class="info-description"><%= i.description %></span>
+                            <span class="info-date"><%= i.date %></span>
+                        </div>
+
+                        <div class="task-category task-category-<%= i.category %>" >
+                            <span><%= i.category %></span>
+                        </div>
+
+                        <a href="/delete-task/?id=<%= i._id %>"> 
+                          
+                            <i class="fas fa-minus-circle"></i>  
+                            
+                        </a>
+                    </div>
+                    
+                                
+                                
+
+
+                <% } %>
+               </form>
+        </div>
+
+        <!-- Adding JS file -->
+        <script src="/js/script.js"></script>
+
+    </body>
+</html>

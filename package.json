@@ -1,7 +1,7 @@
 {
-  "name": "todo",
+  "name": "todo app",
   "version": "1.0.0",
-  "description": "Creating ToDo App",
+  "description": "Add task: todo",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
